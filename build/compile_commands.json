@@ -1,0 +1,142 @@
+[
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/g++ -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glad/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -g -o CMakeFiles/demo.dir/src/demo/main.cc.o -c /home/nkomomwambali/work/LearnOpenGL/src/demo/main.cc",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/demo/main.cc"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glad/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -g -o CMakeFiles/demo.dir/src/ext/glad/src/glad.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glad/src/glad.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glad/src/glad.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/context.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/context.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/context.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/init.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/init.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/init.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/input.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/input.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/input.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/monitor.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/monitor.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/monitor.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/platform.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/platform.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/platform.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/vulkan.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/vulkan.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/window.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/window.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/window.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/egl_context.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/egl_context.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/osmesa_context.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/osmesa_context.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/null_init.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_init.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_init.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/null_monitor.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_monitor.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_monitor.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/null_window.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_window.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_window.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_joystick.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/null_joystick.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/posix_module.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_module.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_module.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_time.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_time.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_thread.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_thread.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_init.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_init.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_monitor.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_monitor.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_window.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/x11_window.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/xkb_unicode.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/xkb_unicode.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/glx_context.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/glx_context.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/wl_init.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_init.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_init.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/wl_monitor.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_monitor.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_monitor.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/wl_window.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_window.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/wl_window.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/linux_joystick.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/linux_joystick.c"
+},
+{
+  "directory": "/home/nkomomwambali/work/LearnOpenGL/build",
+  "command": "/usr/bin/gcc -DHAVE_MEMFD_CREATE -D_DEFAULT_SOURCE -D_GLFW_WAYLAND -D_GLFW_X11 -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/include -I/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src -I/home/nkomomwambali/work/LearnOpenGL/build/src/ext/glfw/src -g -fPIC -Wall -std=c99 -o src/ext/glfw/src/CMakeFiles/glfw.dir/posix_poll.c.o -c /home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_poll.c",
+  "file": "/home/nkomomwambali/work/LearnOpenGL/src/ext/glfw/src/posix_poll.c"
+}
+]
