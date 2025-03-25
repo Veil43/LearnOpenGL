@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include "ch5_hello_triangle.h"
+
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
 
@@ -44,6 +46,7 @@ main(int argc, char **argv)
     // Set the callback for window resizing
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
 
+    ch5::Start();
     // Render
     while (!glfwWindowShouldClose(window))
     {
@@ -51,6 +54,7 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        ch5::Run();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
