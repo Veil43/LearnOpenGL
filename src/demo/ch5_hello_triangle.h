@@ -2,6 +2,7 @@
 #define HELLO_TRIANGLE_H
 
 #include "types.h"
+#include "object.h"
 
 namespace ch5
 {
@@ -59,41 +60,24 @@ namespace ch5
 
     static u32 shader;
     static u32 vao;
+    static Object3D obj;
     void Start()
     {
-        static f32 vertices[] = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.0f,  0.5f, 0.0f,
+        vertex vertices[] =
+        {
+            0.5f,  0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+           -0.5f, -0.5f, 0.0f,
+           -0.5f,  0.5f, 0.0f,
         };
 
-        vao;
-        glGenVertexArrays(1, &vao);
-        glBindVertexArray(vao);
-        
-        u32 vbo;
-        glGenBuffers(1, &vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-        glBindVertexArray(0);
+        u32 indices[] =
+        {
+            0, 1, 3,
+            1, 2, 3,
+        };
 
-        /*
-        [glVertexAttriPointer]
-        Defines a pointer in the strictest sense of the term. 
-        For example take attribute Pos, we defining a POINTER Pos* and giving OpenGL enough information to do 
-        process operations such as Pos*+4 where this translate to something Pos* + 4*Stride, giving us the start address
-        of the 4th next Pos.
-
-        [glEnableVertexAttibArray]
-        Since we have multiple vertices, each with a Pos attribute, and a known number of vertices,
-        Pos* effectively defines an array such that Pos*++ always yields the next Pos attributes in line.
-        In fact this apply to any and all attributes for which we defined a glVertexAttribPointer.
-        Here we simply enable the attribute array that was assigned to index n where n is a number (0,1,2,3...)
-
-        These pointers and therefore arrays(of attributes) are what a [vao] then stores, along with the buffer holding the data.
-        */
+        obj = Object3D(vertices, 4, indices, 6);
 
         const char* kVertexShaderSource = 
         "#version 330 core\n"
@@ -114,13 +98,15 @@ namespace ch5
         "   frag_color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
         "}\n";
         shader = CreateShaderProgram(kVertexShaderSource, kFragmentShaderSource);
+        std::cout << "Shader: " << shader << std::endl;
     }
 
     void Run()
     {
-        glUseProgram(shader);
-        glBindVertexArray(vao);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        obj.Draw(shader);
+        // glUseProgram(shader);
+        // glBindVertexArray(vao);
+        // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 
 } // namespace ch5
