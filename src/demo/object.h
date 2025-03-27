@@ -21,10 +21,11 @@ DRAWING: We can then draw these arrays using [glDrawArrays] or use [glDrawElemen
 #include "types.h"
 #include "shader.h"
 
-struct vertex
+struct Vertex
 {
-    struct position { f32 x, y, z; } position;
-    struct color { f32 r, g, b; } color;
+    struct Position { f32 x, y, z; } position;
+    struct Color { f32 r, g, b; } color;
+    struct UV { f32 u, v; } uv;
 };
 
 class Object3D
@@ -37,21 +38,23 @@ public:
         : vao_{0}, icount_{0}, vbo_{0}, ebo_{0}
     {}
 
-    Object3D(vertex* vertices, u32 vcount, u32* indices, u32 icount)
+    Object3D(Vertex* vertices, u32 vcount, u32* indices, u32 icount)
         : icount_{icount}
     {
         glGenVertexArrays(1, &vao_);
         glBindVertexArray(vao_);
         glGenBuffers(1, &vbo_);
         glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertex) * vcount, vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vcount, vertices, GL_STATIC_DRAW);
         glGenBuffers(1, &ebo_);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * icount, indices, GL_STATIC_DRAW);
-        glVertexAttribPointer(kPositionIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, position));
-        glVertexAttribPointer(kColorIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, color));
+        glVertexAttribPointer(kPositionIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+        glVertexAttribPointer(kColorIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+        glVertexAttribPointer(kUVIndex_, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
         glEnableVertexAttribArray(kPositionIndex_);
         glEnableVertexAttribArray(kColorIndex_);
+        glEnableVertexAttribArray(kUVIndex_);
         glBindVertexArray(0);
     }
 
@@ -78,6 +81,7 @@ private:
     u32 ebo_;
     const u32 kPositionIndex_ = 0;
     const u32 kColorIndex_ = 1;
+    const u32 kUVIndex_ = 2;
 };
 
 #endif // OBJECT_H

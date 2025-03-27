@@ -1,6 +1,8 @@
 #define GLFW_INCLUDE_NONE
+#define STB_IMAGE_IMPLEMENTATION
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include <stb_image.h>
 
 #include <iostream>
 #include <thread>
@@ -13,6 +15,7 @@ void GLQueryError(void);
 #include "chcommon.h"
 #include "ch5.h"
 #include "ch6.h"
+#include "ch7.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -71,6 +74,15 @@ main(int argc, char **argv)
     Object3D obj5 = ch5::Start();
     ch_return ch6work = ch6::Start("../src/demo/shaders/ch6/ch6.vs", "../src/demo/shaders/ch6/ch6.fs");
     ch_return ch6exercise1 = ch6::Start("../src/demo/shaders/ch6/ch6.1.vs", "../src/demo/shaders/ch6/ch6.fs");
+    ch_return ch6exercise2 = ch6::Start("../src/demo/shaders/ch6/ch6.2.vs", "../src/demo/shaders/ch6/ch6.fs");
+    auto ch6ex = [&]() -> void 
+    {
+        ch6exercise2.shader.Use();
+        ch6exercise2.shader.SetFloat("offset", 0.5);
+    };
+    ch6ex();
+    ch_return ch7work = ch7::Start("../src/demo/shaders/ch7/ch7.vs", "../src/demo/shaders/ch7/ch7.fs");
+
     // Render
     while (!glfwWindowShouldClose(window))
     {
@@ -78,7 +90,7 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        ch6::Run(ch6exercise1);
+        ch7::Run(ch7work);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

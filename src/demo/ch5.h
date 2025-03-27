@@ -11,12 +11,12 @@ namespace ch5
     static u32 shader = 0;
     Object3D Start()
     {
-        vertex vertices[] =
+        Vertex vertices[] =
         {
-            0.5f,  0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-           -0.5f, -0.5f, 0.0f,
-           -0.5f,  0.5f, 0.0f,
+            0.5f,  0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+            0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+           -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+           -0.5f,  0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
         };
 
         u32 indices[] =

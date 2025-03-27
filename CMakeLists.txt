@@ -18,6 +18,9 @@ target_include_directories(demo PRIVATE src/ext/glad/include/)
 find_package(OpenGL REQUIRED)
 target_link_libraries(demo PRIVATE OpenGL::GL)
 
+# Configure lone headers
+target_include_directories(demo PRIVATE src/ext)
+
 # Degub config stuff
 if(ENABLE_SAN AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Enabling sanitizers (ASan and UBSan)")

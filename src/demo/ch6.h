@@ -1,17 +1,21 @@
 #ifndef CH6
 #define CH6
 
+/*
+Chapter 6 Shaders
+*/
+
 #include "chcommon.h"
 
 namespace ch6
 {
     ch_return Start(const char* vsource, const char* fsource)
     {
-        vertex vertices[] = 
+        Vertex vertices[] = 
         {
-             0.0f,  0.5,  0.0f, 1.0f, 0.0f, 0.0f,
-             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+             0.0f,  0.5,  0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
         };
 
         u32 indices[]
