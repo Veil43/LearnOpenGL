@@ -19,10 +19,12 @@ DRAWING: We can then draw these arrays using [glDrawArrays] or use [glDrawElemen
 */
 
 #include "types.h"
+#include "shader.h"
 
 struct vertex
 {
-    f32 x, y, z;
+    struct position { f32 x, y, z; } position;
+    struct color { f32 r, g, b; } color;
 };
 
 class Object3D
@@ -36,6 +38,7 @@ public:
     {}
 
     Object3D(vertex* vertices, u32 vcount, u32* indices, u32 icount)
+        : icount_{icount}
     {
         glGenVertexArrays(1, &vao_);
         glBindVertexArray(vao_);
@@ -45,20 +48,11 @@ public:
         glGenBuffers(1, &ebo_);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * icount, indices, GL_STATIC_DRAW);
-        glVertexAttribPointer(kPositionIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)0);
+        glVertexAttribPointer(kPositionIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, position));
+        glVertexAttribPointer(kColorIndex_, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, color));
         glEnableVertexAttribArray(kPositionIndex_);
+        glEnableVertexAttribArray(kColorIndex_);
         glBindVertexArray(0);
-    }
-
-    Object3D& operator=(const Object3D& other)
-    {
-        if (this == &other) 
-            return *this;
-        vao_ = other.vao_;
-        icount_ = other.icount_;
-        vbo_ = other.vbo_;
-        ebo_ = other.ebo_;
-        return *this;
     }
 
     void Draw(u32 shader)
@@ -66,12 +60,24 @@ public:
         glBindVertexArray(vao_);
         glUseProgram(shader);
         glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
+    }
+
+    void Draw(Shader s)
+    {
+        glBindVertexArray(vao_);
+        s.Use();
+        glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
     }
 
 private:
     u32 vbo_;
     u32 ebo_;
     const u32 kPositionIndex_ = 0;
+    const u32 kColorIndex_ = 1;
 };
 
 #endif // OBJECT_H

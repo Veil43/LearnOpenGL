@@ -1,20 +1,35 @@
-#ifndef HELLO_TRIANGLE_H
-#define HELLO_TRIANGLE_H
+#ifndef SHADER_H
+#define SHADER_H
 
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 #include "types.h"
-#include "object.h"
+
+std::string LoadFile(const std::string& path)
+{
+    std::ifstream file(path);
+    if (!file.is_open())
+    {
+        std::cout << "IO::ERROR:Could not open File: " << path << std::endl;;
+        return "";
+    }
+    std::stringstream buffer;
+    buffer <<  file.rdbuf(); // what the fuck is this?
+    std::string output = buffer.str();
+    file.close();
+    return output;
+}
 
 namespace ch5
 {
-    void Start(void);
-    void Run(void);
-
     /*
     @param type
     This is a GLenum that can be 
     `GL_VERTEX_SHADER` or `GL_FRAGMENT_SHADER`
     */
-    static u32 
+    u32
     CreateShader(u32 type, const char* source)
     {
         u32 shader = glCreateShader(type);
@@ -33,8 +48,8 @@ namespace ch5
         }
         return shader;
     }
-    
-    static u32 
+
+    u32
     CreateShaderProgram(const char* vsource , const char* fsource)
     {
         u32 vertex_shader = CreateShader(GL_VERTEX_SHADER, vsource);
@@ -57,58 +72,38 @@ namespace ch5
         glDeleteShader(fragment_shader);
         return shader_program;
     }
+}
+    
+class Shader
+{
+public:
+    u32 ID_;
 
-    static u32 shader;
-    static u32 vao;
-    static Object3D obj;
-    void Start()
+
+    Shader(const char* vertex_path, const char* fragment_path)
     {
-        vertex vertices[] =
-        {
-            0.5f,  0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-           -0.5f, -0.5f, 0.0f,
-           -0.5f,  0.5f, 0.0f,
-        };
-
-        u32 indices[] =
-        {
-            0, 1, 3,
-            1, 2, 3,
-        };
-
-        obj = Object3D(vertices, 4, indices, 6);
-
-        const char* kVertexShaderSource = 
-        "#version 330 core\n"
-        "\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
-        "}\n";
-        const char* kFragmentShaderSource =
-        "#version 330 core\n"
-        "\n"
-        "out vec4 frag_color;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   frag_color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n";
-        shader = CreateShaderProgram(kVertexShaderSource, kFragmentShaderSource);
-        std::cout << "Shader: " << shader << std::endl;
+        std::string vsource = LoadFile(vertex_path);
+        std::string fsource = LoadFile(fragment_path);
+        ID_ = ch5::CreateShaderProgram(vsource.c_str(), fsource.c_str());
     }
 
-    void Run()
+    void Use()
     {
-        obj.Draw(shader);
-        // glUseProgram(shader);
-        // glBindVertexArray(vao);
-        // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glUseProgram(ID_);
     }
 
-} // namespace ch5
+    void SetBool(const std::string& name, bool val) const
+    {
+        glUniform1i(glGetUniformLocation(ID_, name.c_str()), val);
+    }
+    void SetInt(const std::string& name, int val) const
+    {
+        glUniform1i(glGetUniformLocation(ID_, name.c_str()), val);
+    }
+    void SetFloat(const std::string& name, f32 val) const
+    {
+        glUniform1f(glGetUniformLocation(ID_, name.c_str()), val);
+    }
+};
 
-#endif // HELLO_TRIANGLE_H
+#endif // SHADER_H
