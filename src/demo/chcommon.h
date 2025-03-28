@@ -4,6 +4,7 @@
 #include "types.h"
 #include "object.h"
 #include "shader.h"
+#include "math.h"
 
 struct ch_return
 {

@@ -53,36 +53,12 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
                 GL_LINEAR_MIPMAP_LINEAR);
 */
 #include "chcommon.h"
+#include "texture.h"
 
 namespace ch7
 {
     ch_return Start(const char* vsource, const char* fsource)
     {
-        // [Texture Wrapping]
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        // [Texture Filtering]
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        // Load the image to use as texture
-        int width, height, nr_channels;
-        u8 *data = stbi_load("../images/container.jpg", &width, &height, &nr_channels, 0);
-        // Generate a texture
-        u32 texture;
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        if (!data)
-        {
-            std::cerr << "Failed load texture\n";
-        }
-        else
-        {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-            glGenerateMipmap(GL_TEXTURE_2D);
-        }
-        stbi_image_free(data);
-
         Vertex vertices[] = 
         {
             // pos             // col           // uv
@@ -91,15 +67,28 @@ namespace ch7
             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
             -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
         };
-
+        
         u32 indices[] =
         {
             0, 1, 3,
             1, 2, 3,
         };
+        
+        stbi_set_flip_vertically_on_load(true);
 
+        Texture texture1("../images/container.jpg", GL_RGB);
+        Texture texture2("../images/awesomeface.png", GL_RGBA);
+        // [Texture Wrapping]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        // [Texture Filtering]
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        
         Object3D obj(vertices, 4, indices, 6);
         Shader shader(vsource, fsource);
+        texture1.Activate(0, shader, "texture1");
+        texture2.Activate(1, shader, "texture2");
         return {obj, shader};
     }
 

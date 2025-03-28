@@ -21,6 +21,10 @@ target_link_libraries(demo PRIVATE OpenGL::GL)
 # Configure lone headers
 target_include_directories(demo PRIVATE src/ext)
 
+# Configure GLM
+add_subdirectory(src/ext/glm)
+target_link_libraries(demo PRIVATE glm)
+
 # Degub config stuff
 if(ENABLE_SAN AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Enabling sanitizers (ASan and UBSan)")
