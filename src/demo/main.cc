@@ -16,6 +16,7 @@ void GLQueryError(void);
 #include "ch5.h"
 #include "ch6.h"
 #include "ch7.h"
+#include "ch8.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -82,7 +83,8 @@ main(int argc, char **argv)
     };
     ch6ex();
     ch_return ch7work = ch7::Start("../src/demo/shaders/ch7/ch7.vs", "../src/demo/shaders/ch7/ch7.fs");
-
+    ch_return ch8work = ch8::Start(ch7work.obj, "../src/demo/shaders/ch8/ch8.vs", "../src/demo/shaders/ch8/ch8.fs");
+    
     // Render
     while (!glfwWindowShouldClose(window))
     {
@@ -90,7 +92,7 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        ch7::Run(ch7work);
+        ch8::Run(ch8work);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

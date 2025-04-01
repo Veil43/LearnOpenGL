@@ -79,6 +79,7 @@ class Shader
 public:
     u32 ID_;
 
+    Shader() =delete;
 
     Shader(const char* vertex_path, const char* fragment_path)
     {
