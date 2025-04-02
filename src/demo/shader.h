@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include "types.h"
+#include "math.h"
 
 std::string LoadFile(const std::string& path)
 {
@@ -93,6 +94,11 @@ public:
         glUseProgram(ID_);
     }
 
+    void Unbind()
+    {
+        glUseProgram(0);
+    }
+
     void SetBool(const std::string& name, bool val) const
     {
         glUniform1i(glGetUniformLocation(ID_, name.c_str()), val);
@@ -104,6 +110,10 @@ public:
     void SetFloat(const std::string& name, f32 val) const
     {
         glUniform1f(glGetUniformLocation(ID_, name.c_str()), val);
+    }
+    void SetMat4f(const std::string& name, const glm::mat4& mat)
+    {
+        glUniformMatrix4fv(glGetUniformLocation(ID_, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
     }
 };
 

@@ -2,6 +2,7 @@
 #define TEXTURE_H
 
 /*
+See chapter 7
 [Texture units]
 A texture unit is a pipeline specific resource to which we can bind a texture. (up to 16 units)
 This unit can then be accessed through a uniform sampler2D inside our shader.

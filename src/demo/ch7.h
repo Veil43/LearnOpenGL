@@ -47,7 +47,7 @@ You can generte mipmaped textures with:
 glGenerateMimpmaps
 You can set filtereing modes for minification to:
 GL_(texture filtering)_MIPMAP_(mipmap filtering)
-GL_NEAREST_MIPMAP_LINEAR : interpalest betweens 2 mipmaps closest to to the pixel size and uses NEAREST filtering
+GL_NEAREST_MIPMAP_LINEAR : interpolates betweens 2 mipmaps closest to to the pixel size and uses NEAREST filtering
 GL_LINEAR_MIPMAP_NEAREST : oppiste top
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
                 GL_LINEAR_MIPMAP_LINEAR);
