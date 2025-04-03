@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CH10
+#define CH10
 
 #include "chcommon.h"
 #include "ch9.h"
@@ -96,9 +97,9 @@ namespace ch10
 
     void Start(GLFWwindow* window)
     {
-        glfwSetCursorPosCallback(window, MouseCallback);            // << Set a mouse cursor callback
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // << Disable cursor visibility
-        glfwSetScrollCallback(window, ScrollCallback);              // Set the scroll whell callback
+        glfwSetCursorPosCallback(window, MouseCallback);                // << Set a mouse cursor callback
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);    // << Disable cursor visibility
+        glfwSetScrollCallback(window, ScrollCallback);                  // Set the scroll whell callback
         /*
             When handling mouse input for a flyin camera these are the steps we need to take:
             1. Calculate the mouse's offset since the last frame.
@@ -149,3 +150,4 @@ namespace ch10
     }
 }
 
+#endif // CH10
