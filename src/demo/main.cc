@@ -89,7 +89,7 @@ main(int argc, char **argv)
     ch_return ch9work = ch9::Start((kWWidth/kWHeight), "../src/demo/shaders/ch9/ch9.vs", "../src/demo/shaders/ch9/ch9.fs");
     // CHAPTER 10 USES CHAPTER 9's WORK
     ch10::Start(window);
-    
+
     // Timing
     f64 last_time = glfwGetTime();
     f64 delta_time = 0.0f;
@@ -100,7 +100,7 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        ch10::Run(ch9work, delta_time);
+        ch10::Run(ch9work, kWWidth/kWHeight, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -84,11 +84,21 @@ namespace ch10
             pitch = -89.0f;
     }
 
+    static f32 zoom = 45.0f;
+    void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+    {
+        zoom -= (float)yoffset;
+        if (zoom < 1.0f)
+            zoom = 1.0f;
+        if (zoom > 45.0f)
+            zoom = 45.0f;
+    }
+
     void Start(GLFWwindow* window)
     {
         glfwSetCursorPosCallback(window, MouseCallback);            // << Set a mouse cursor callback
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // << Disable cursor visibility
-
+        glfwSetScrollCallback(window, ScrollCallback);              // Set the scroll whell callback
         /*
             When handling mouse input for a flyin camera these are the steps we need to take:
             1. Calculate the mouse's offset since the last frame.
@@ -98,7 +108,7 @@ namespace ch10
         */
     }
 
-    void Run(ch_return input, f64 dt)
+    void Run(ch_return input, f32 aspect_ratio, f64 dt)
     {
         delta_time = dt;
         // Define a lookat matrix
@@ -112,8 +122,13 @@ namespace ch10
         camera_front = glm::normalize(direction);
         glm::mat4 view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
         
+        // Createa a projection matrix that allows us to zoom
+        f32 fov = zoom;
+        glm::mat4 projection = glm::perspective(glm::radians(fov), aspect_ratio, 0.1f, 100.0f);
+
         input.shader.Use();
         input.shader.SetMat4f("view", view);
+        input.shader.SetMat4f("projection", projection);
         input.shader.Unbind();
         GLQueryError();
         
