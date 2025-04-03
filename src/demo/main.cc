@@ -18,6 +18,7 @@ void GLQueryError(void);
 #include "ch7.h"
 #include "ch8.h"
 #include "ch9.h"
+#include "ch10.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -86,7 +87,11 @@ main(int argc, char **argv)
     ch_return ch7work = ch7::Start("../src/demo/shaders/ch7/ch7.vs", "../src/demo/shaders/ch7/ch7.fs");
     ch_return ch8work = ch8::Start(ch7work.obj, "../src/demo/shaders/ch8/ch8.vs", "../src/demo/shaders/ch8/ch8.fs");
     ch_return ch9work = ch9::Start((kWWidth/kWHeight), "../src/demo/shaders/ch9/ch9.vs", "../src/demo/shaders/ch9/ch9.fs");
+    // CHAPTER 10 USES CHAPTER 9's WORK
 
+    // Timing
+    f64 last_time = glfwGetTime();
+    f64 delta_time = 0.0f;
     // Render
     while (!glfwWindowShouldClose(window))
     {
@@ -94,10 +99,13 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        ch9::Run(ch9work);
+        ch10::Run(ch9work, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+        f64 current_time = glfwGetTime();
+        delta_time = current_time - last_time;
+        last_time = current_time;
     }
 
     glfwTerminate();
@@ -110,10 +118,11 @@ void ProcessInput(GLFWwindow *window)
     {
         glfwSetWindowShouldClose(window, true);
     }
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
     {
         ToggleWireframe();
     }
+    ch10::Ch10ProcessInput(window);
 }
 
 void 
@@ -140,7 +149,8 @@ void GLQueryError()
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)
     {
-        std::cout << "OpenGL Error: " << error << std::endl;
+        std::cout << "OpenGL Error: " << std::hex <<  error << std::endl;
+        __builtin_trap();
     }
 }
 

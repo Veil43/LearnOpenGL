@@ -12,6 +12,66 @@ namespace ch9
 {
     static u32 vao;
     static const i32 kVertices = 36;
+
+    const f32 vertices[] =
+    {
+        -0.5f, -0.5f, -0.5f,   0.0f, 0.0f,
+         0.5f, -0.5f, -0.5f,   1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,   0.0f, 0.0f,
+        
+        -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,   0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
+        
+        -0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+
+         0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+
+        -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,   1.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
+
+        -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,   0.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
+    };
+
+    const glm::vec3 cube_positions[10] = 
+    {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3( 2.0f, 5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f, -7.5f),
+        glm::vec3( 1.3f, -2.0f, -2.5f),
+        glm::vec3( 1.5f, 2.0f, -2.5f),
+        glm::vec3( 1.5f, 0.2f, -1.5f),
+        glm::vec3(-1.3f, 1.0f, -1.5f)
+    };
+
     ch_return Start(f32 aspect_ratio, const std::string& vsource, const std::string& fsource)
     {
         const f32 kNearPosition = 0.1f;
@@ -47,51 +107,6 @@ namespace ch9
         texture1.Activate(0, shader, "texture1");
         texture2.Activate(1, shader, "texture2");
 
-        f32 vertices[] =
-        {
-            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f,
-             0.5f, -0.5f, -0.5f,   1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
-            -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f,
-            
-            -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,   1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,   1.0f, 1.0f,
-            -0.5f,  0.5f,  0.5f,   0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
-            
-            -0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-
-             0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-
-            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,   1.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,   1.0f, 0.0f,
-            -0.5f, -0.5f,  0.5f,   0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f,
-
-            -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,   1.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,   0.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,   0.0f, 1.0f,
-        };
-
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
 
@@ -110,22 +125,6 @@ namespace ch9
         Object3D obj{};
         return {obj, shader};
     }
-#define CH9_RANDOM_FLOAT(number) ((static_cast<f32>(std::rand())/(RAND_MAX + 1.0f))*((float)number))
-#define CH9_RANDOM_VEC3(number) glm::vec3(CH9_RANDOM_FLOAT(number), CH9_RANDOM_FLOAT(number), CH9_RANDOM_FLOAT(number))
-
-    static const glm::vec3 cube_positions[10] = 
-    {
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3( 2.0f, 5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f, 3.0f, -7.5f),
-        glm::vec3( 1.3f, -2.0f, -2.5f),
-        glm::vec3( 1.5f, 2.0f, -2.5f),
-        glm::vec3( 1.5f, 0.2f, -1.5f),
-        glm::vec3(-1.3f, 1.0f, -1.5f)
-    };
 
     void Run(ch_return o)
     {
