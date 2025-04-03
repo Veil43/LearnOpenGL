@@ -42,21 +42,81 @@ namespace ch10
     glm::vec3 camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 camera_up = up;
 
+    static f32 pitch = 0.0f;
+    static f32 yaw = -90.0f; // Look in the -z direction
+
     static f64 delta_time = 0.0f;
+
+    // Set a mouse callback
+    static f32 mouse_last_x = 400;
+    static f32 mouse_last_y = 300;
+    f32 xoffset = 0.0f;
+    f32 yoffset = 0.0f;
+    bool first_mouse = true;
+    void MouseCallback(GLFWwindow* window, double xpos, double ypos)
+    {
+        // avoids jumps from your mouse entering the screen from the edge
+        if (first_mouse)
+        {
+            mouse_last_x = xpos;
+            mouse_last_y = ypos;
+            first_mouse = false;
+        }
+
+        // 1. Calculate the mouse's offset since the last frame.
+        f32 xoffset = xpos - mouse_last_x;
+        f32 yoffset = mouse_last_y - ypos; // reversed: y grow from top to bottom to when you go down ypos grows
+        mouse_last_x = xpos;
+        mouse_last_y = ypos;
+
+        const f32 kSensitivity = 0.1f;
+        xoffset *= kSensitivity;
+        yoffset *= kSensitivity;
+        
+        // 2. Add the offset values to the camera's yaw and pitch values.
+        yaw += xoffset;
+        pitch += yoffset;
+
+        // 3. Add some constraints to the minimuxm/maximum pitch values.
+        if (pitch > 89.0f)
+            pitch = 89.0f;
+        if (pitch < -89.0f)
+            pitch = -89.0f;
+    }
+
+    void Start(GLFWwindow* window)
+    {
+        glfwSetCursorPosCallback(window, MouseCallback);            // << Set a mouse cursor callback
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // << Disable cursor visibility
+
+        /*
+            When handling mouse input for a flyin camera these are the steps we need to take:
+            1. Calculate the mouse's offset since the last frame.
+            2. Add the offset values to the camera's yaw and pitch values.
+            3. Add some constraints to the minimuxm/maximum pitch values.
+            4. Calculate the irection vector.
+        */
+    }
+
     void Run(ch_return input, f64 dt)
     {
         delta_time = dt;
         // Define a lookat matrix
-        const float kRadius = 20.0f;
-        f32 cam_x_pos = sin(glfwGetTime()) * kRadius;
-        f32 cam_z_pos = cos(glfwGetTime()) * kRadius;
-        
-        glm::mat4 view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
+        // Define direction vector from euler angles
+        // 4. Calculate the irection vector.
+        glm::vec3 direction;
+        direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+        direction.y = sin(glm::radians(pitch));
+        direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
+        camera_front = glm::normalize(direction);
+        glm::mat4 view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
+        
         input.shader.Use();
         input.shader.SetMat4f("view", view);
         input.shader.Unbind();
         GLQueryError();
+        
         ch9::Run(input);
     }
 

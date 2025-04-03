@@ -88,7 +88,8 @@ main(int argc, char **argv)
     ch_return ch8work = ch8::Start(ch7work.obj, "../src/demo/shaders/ch8/ch8.vs", "../src/demo/shaders/ch8/ch8.fs");
     ch_return ch9work = ch9::Start((kWWidth/kWHeight), "../src/demo/shaders/ch9/ch9.vs", "../src/demo/shaders/ch9/ch9.fs");
     // CHAPTER 10 USES CHAPTER 9's WORK
-
+    ch10::Start(window);
+    
     // Timing
     f64 last_time = glfwGetTime();
     f64 delta_time = 0.0f;
