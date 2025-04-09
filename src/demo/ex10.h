@@ -39,7 +39,7 @@ namespace ex10
         glfwSetCursorPosCallback(window, mouse_callback);
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         glfwSetScrollCallback(window, scroll_callback);
-        cam.isFPS = true;
+        cam.isFPS_ = true;
     }
 
     glm::mat4 LookAt(const glm::vec3& src, const glm::vec3& dest, const glm::vec3& up)

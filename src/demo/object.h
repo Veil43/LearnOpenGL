@@ -33,13 +33,14 @@ class Object3D
 public:
     u32 vao_;
     u32 icount_;
+    u32 vcount_;
 
     Object3D()
-        : vao_{0}, icount_{0}, vbo_{0}, ebo_{0}
+        : vao_{0}, icount_{0}, vbo_{0}, ebo_{0}, vcount_{0}
     {}
 
     Object3D(Vertex* vertices, u32 vcount, u32* indices, u32 icount)
-        : icount_{icount}
+        : icount_{icount}, vcount_{vcount}
     {
         glGenVertexArrays(1, &vao_);
         glBindVertexArray(vao_);
@@ -58,11 +59,29 @@ public:
         glBindVertexArray(0);
     }
 
+    Object3D(f32* vertices, u32 vcount, u32 datasize)
+        : icount_{0}, vcount_{vcount}, ebo_{0}
+    {
+        glGenVertexArrays(1, &vao_);
+        glBindVertexArray(vao_);
+        glGenBuffers(1, &vbo_);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+        glBufferData(GL_ARRAY_BUFFER, datasize, vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(kPositionIndex_, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(f32), (void*)0);
+        glEnableVertexAttribArray(kPositionIndex_);
+        glBindVertexArray(0);
+    }
+
     void Draw(u32 shader)
     {
         glBindVertexArray(vao_);
         glUseProgram(shader);
-        glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+
+        if (icount_ > 0)
+            glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+        else
+            glDrawArrays(GL_TRIANGLES, 0, vcount_/3);
+
         glBindVertexArray(0);
         glUseProgram(0);
     }
@@ -71,9 +90,14 @@ public:
     {
         glBindVertexArray(vao_);
         s.Use();
-        glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+
+        if (icount_ > 0)
+            glDrawElements(GL_TRIANGLES, icount_, GL_UNSIGNED_INT, 0);
+        else
+            glDrawArrays(GL_TRIANGLES, 0, vcount_/3);
+
         glBindVertexArray(0);
-        glUseProgram(0);
+        s.Unbind();
     }
 
 private:

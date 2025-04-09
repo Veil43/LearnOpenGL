@@ -12,4 +12,10 @@ struct ch_return
     Shader shader;
 };
 
+struct ch12_return
+{
+    Shader light_shader;
+    Shader object_shader;
+};
+
 #endif // CH_COMMON_H

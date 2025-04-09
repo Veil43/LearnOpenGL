@@ -7,11 +7,39 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include <cmath>
 
 #define ENABLE_SAN 1
 
+// Set GLFWCursorCallback to your own function and it will be call automatically by the windowing system
+#define DECL_GLFW_CURSOR_CALLBACK(name) void name(GLFWwindow* window, double xpos, double ypos)
+DECL_GLFW_CURSOR_CALLBACK(GLFWDefaultCursorCallback)
+{
+    std::cerr << "WARNING: Not capturing the cursor callback.\n";
+    return;
+}
+typedef DECL_GLFW_CURSOR_CALLBACK(glfw_cursor_callback_type);
+static glfw_cursor_callback_type* GLFWCursorCallback = GLFWDefaultCursorCallback;
+
+#define DECL_GLFW_SCROLL_CALLBACK(name) void name(GLFWwindow* window, double xoffset, double yoffset)
+DECL_GLFW_SCROLL_CALLBACK(GLFWDefaultScrollCallback)
+{
+    std::cerr << "WARNING: Not capturing the scroll callback.\n";
+    return;
+}
+typedef DECL_GLFW_SCROLL_CALLBACK(glfw_scroll_callback_type);
+static glfw_scroll_callback_type* GLFWScrollCallback = GLFWDefaultScrollCallback;
+
+#define DECL_GLFW_MOVEMENT_CALLBACK(name) void name(GLFWwindow* window)
+DECL_GLFW_MOVEMENT_CALLBACK(GLFWDefaultMovementCallback)
+{
+    std::cerr << "WARNING: Not capturing the movement callback.\n";
+    return;
+}
+typedef DECL_GLFW_MOVEMENT_CALLBACK(glfw_movement_callback_type);
+static glfw_movement_callback_type* GLFWMovementCallback = GLFWDefaultMovementCallback;
+
 void GLQueryError(void);
+static GLFWwindow* globWindow = nullptr;
 #include "chcommon.h"
 #include "ch5.h"
 #include "ch6.h"
@@ -20,6 +48,7 @@ void GLQueryError(void);
 #include "ch9.h"
 #include "ch10.h"
 #include "ex10.h"
+#include "ch12.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -52,7 +81,7 @@ main(int argc, char **argv)
         return 1;
     }
     glfwMakeContextCurrent(window);
-
+    globWindow = window;
     // Load the functions from the opengl dll or so with GLAD using gladLoadGLLoader
     // You can pass it a function loader like glfwGetProcAddress or use gladLoadGL()
     // if (!gladLoadGL())
@@ -68,11 +97,6 @@ main(int argc, char **argv)
         glfwTerminate();
         return 1;
     }
-
-    int *ptr = (int*) malloc(3*sizeof(int));
-
-    // Set the callback for window resizing
-    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     GLQueryAttribCount();
  
     Object3D obj5 = ch5::Start();
@@ -91,6 +115,13 @@ main(int argc, char **argv)
     // CHAPTER 10 USES CHAPTER 9's WORK
     // ch10::Start(window);
     ex10::Start1(window); // << Excercises for chapter 10
+    ch12_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/ch12.vs", "../src/demo/shaders/lighting/ch12.fs", "../src/demo/shaders/lighting/light.fs");
+
+
+    // Set the callback for window resizing
+    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
+    glfwSetCursorPosCallback(window, GLFWCursorCallback);
+    glfwSetScrollCallback(window, GLFWScrollCallback);
 
     // Timing
     f64 last_time = glfwGetTime();
@@ -102,8 +133,9 @@ main(int argc, char **argv)
 
         glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // ch10::Run(ch9work, kWWidth/kWHeight, delta_time);
-        ex10::Run1(ch9work, kWWidth/kWHeight, delta_time);
+
+        // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
+        lighting::Run(ch12work, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -128,6 +160,7 @@ void ProcessInput(GLFWwindow *window)
     }
     ch10::Ch10ProcessInput(window);
     ex10::Ex10ProcessInput(window);
+    GLFWMovementCallback(window);
 }
 
 void 
@@ -154,7 +187,8 @@ void GLQueryError()
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)
     {
-        std::cout << "OpenGL Error: " << std::hex <<  error << std::endl;
+        glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        std::cout << "OpenGL Error: 0x" << std::hex <<  error << std::endl;
         __builtin_trap();
     }
 }

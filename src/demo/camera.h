@@ -7,7 +7,7 @@
 const f32 kYaw = -90.0f;
 const f32 kPitch = 0.0f;
 const f32 kSensitivity = 0.1f;
-const f32 kSpeed = 1.0f;
+const f32 kSpeed = 5.0f;
 const f32 kZoom = 45.0f;
 
 enum class CameraMovement
@@ -32,7 +32,7 @@ public:
 
     // FPS Camera 
     glm::vec3 front_;
-    bool isFPS = false;
+    bool isFPS_;
 
     // Camera settings
     f32 movement_speed_;
@@ -50,9 +50,10 @@ public:
     (
         glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), 
-        f32 yaw = kYaw, f32 pitch = kPitch
+        f32 yaw = kYaw, f32 pitch = kPitch,
+        bool isFPS = false
     ) 
-        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
+        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}, isFPS_{isFPS}
     {
         position_ = position;
         world_up_ = up;
@@ -62,8 +63,8 @@ public:
     }
     
     // Constructor with scalar values
-    Camera(f32 posx, f32 posy, f32 posz, f32 upx, f32 upy, f32 upz, f32 yaw, f32 pitch)
-        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
+    Camera(f32 posx, f32 posy, f32 posz, f32 upx, f32 upy, f32 upz, f32 yaw, f32 pitch, bool isFPS = false)
+        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}, isFPS_{isFPS}
     {
         position_ = glm::vec3(posx, posy, posz);
         world_up_ = glm::vec3(upx, upy, upz);
@@ -83,9 +84,9 @@ public:
     {
         f32 velocity = movement_speed_ * delta_time;
         if (direction == CameraMovement::kForward)
-            position_ += (isFPS? front_ : lookat_) * velocity;
+            position_ += (isFPS_? front_ : lookat_) * velocity;
         if (direction == CameraMovement::kBackward)
-            position_ -= (isFPS? front_ : lookat_) * velocity;
+            position_ -= (isFPS_? front_ : lookat_) * velocity;
         if (direction == CameraMovement::kRight)
             position_ += right_ * velocity;
         if (direction == CameraMovement::kLeft)
