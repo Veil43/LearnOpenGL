@@ -23,12 +23,16 @@ class Camera
 public:
     // Camera vector attributes
     glm::vec3 position_;
-    glm::vec3 front_;
+    glm::vec3 lookat_;
     glm::vec3 up_;
     glm::vec3 right_;
     glm::vec3 world_up_;
     // Euler angles
     Euler euler_;
+
+    // FPS Camera 
+    glm::vec3 front_;
+    bool isFPS = false;
 
     // Camera settings
     f32 movement_speed_;
@@ -48,7 +52,7 @@ public:
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), 
         f32 yaw = kYaw, f32 pitch = kPitch
     ) 
-        : front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
+        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
     {
         position_ = position;
         world_up_ = up;
@@ -59,7 +63,7 @@ public:
     
     // Constructor with scalar values
     Camera(f32 posx, f32 posy, f32 posz, f32 upx, f32 upy, f32 upz, f32 yaw, f32 pitch)
-        : front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
+        : lookat_{glm::vec3(0.0f, 0.0f, -1.0f)}, front_{glm::vec3(0.0f, 0.0f, -1.0f)}, movement_speed_{kSpeed}, mouse_sensitivity_{kSensitivity}, zoom_{kZoom}
     {
         position_ = glm::vec3(posx, posy, posz);
         world_up_ = glm::vec3(upx, upy, upz);
@@ -71,7 +75,7 @@ public:
     // Returns view matrix using Euler Angles and LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
-        return glm::lookAt(position_, position_ + front_, up_);
+        return glm::lookAt(position_, position_ + lookat_, up_);
     }
 
     // Process input received from keyboard
@@ -79,9 +83,9 @@ public:
     {
         f32 velocity = movement_speed_ * delta_time;
         if (direction == CameraMovement::kForward)
-            position_ += front_ * velocity;
+            position_ += (isFPS? front_ : lookat_) * velocity;
         if (direction == CameraMovement::kBackward)
-            position_ -= front_ * velocity;
+            position_ -= (isFPS? front_ : lookat_) * velocity;
         if (direction == CameraMovement::kRight)
             position_ += right_ * velocity;
         if (direction == CameraMovement::kLeft)
@@ -120,15 +124,20 @@ private:
 
     void UpdateCameraVectors()
     {
-        // recalculate the front_ vector
-        glm::vec3 front;
-        front.x = cos(glm::radians(euler_.yaw)) * cos(glm::radians(euler_.pitch));
-        front.z = sin(glm::radians(euler_.pitch));
-        front.z = sin(glm::radians(euler_.yaw)) * cos(glm::radians(euler_.pitch));
-        front_ = glm::normalize(front);
+        // recalculate the lookat_ vector
+        glm::vec3 new_lookat, new_front;
+        new_front.x = new_lookat.x = cos(glm::radians(euler_.yaw)) * cos(glm::radians(euler_.pitch));
+        new_lookat.y = sin(glm::radians(euler_.pitch));
+        new_front.y = front_.y;
+        new_front.z = new_lookat.z = sin(glm::radians(euler_.yaw)) * cos(glm::radians(euler_.pitch));
+        lookat_ = glm::normalize(new_lookat);
+        
+        // For FPS Camera (We only update based on yaw not pitch so when we move we move along the xz plane)
+        front_ = new_front;
+
         // recalculate right_ and up_
-        right_ = glm::normalize(glm::cross(front_, world_up_));
-        up_ = glm::normalize(glm::cross(right_, front_));
+        right_ = glm::normalize(glm::cross(lookat_, world_up_));
+        up_ = glm::normalize(glm::cross(right_, lookat_));
     }
 };
 

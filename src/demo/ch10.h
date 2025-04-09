@@ -148,6 +148,6 @@ namespace ch10
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
             camera_pos += glm::normalize(glm::cross(camera_front, camera_up)) * kCameraSpeed; // << Move to the left
     }
-}
+} // namespace ch10
 
 #endif // CH10
