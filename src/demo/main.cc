@@ -115,7 +115,7 @@ main(int argc, char **argv)
     // CHAPTER 10 USES CHAPTER 9's WORK
     // ch10::Start(window);
     ex10::Start1(window); // << Excercises for chapter 10
-    ch12_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/ch12.vs", "../src/demo/shaders/lighting/ch12.fs", "../src/demo/shaders/lighting/light.fs");
+    lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/object.fs", "../src/demo/shaders/lighting/light.fs");
 
 
     // Set the callback for window resizing

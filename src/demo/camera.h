@@ -7,7 +7,7 @@
 const f32 kYaw = -90.0f;
 const f32 kPitch = 0.0f;
 const f32 kSensitivity = 0.1f;
-const f32 kSpeed = 5.0f;
+const f32 kSpeed = 1.0f;
 const f32 kZoom = 45.0f;
 
 enum class CameraMovement

@@ -12,7 +12,7 @@ struct ch_return
     Shader shader;
 };
 
-struct ch12_return
+struct lighting_return
 {
     Shader light_shader;
     Shader object_shader;

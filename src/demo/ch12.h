@@ -61,14 +61,14 @@ namespace lighting
             cam.ProcessKeyboard(CameraMovement::kRight, delta_time);
     }
 
-    ch12_return Start(f32 ar, const std::string& vpath, const std::string& fpath, const std::string& lpath) 
+    lighting_return Start(f32 ar, const std::string& vpath, const std::string& fpath, const std::string& lpath) 
     {
         aspect_ratio = ar;
         GLFWCursorCallback = lighting_cursor_callback;
         GLFWScrollCallback = lighting_scroll_callback;
         GLFWMovementCallback = lighting_movement_callback;
 
-        cam.isFPS_ = true;
+        // cam.isFPS_ = true;
 
         // glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -80,12 +80,14 @@ namespace lighting
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferData(GL_ARRAY_BUFFER, sizeof(kTheCube), kTheCube, GL_STATIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(f32), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)0);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)(3*sizeof(float)));
         glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
 
         glBindVertexArray(light_vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(f32), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)0);
         glEnableVertexAttribArray(0);
 
         glBindVertexArray(0);
@@ -109,6 +111,7 @@ namespace lighting
         container_shader.SetMat4f("projection", glm::perspective(glm::radians(cam.zoom_), aspect_ratio, 0.1f, 100.0f));
         glUniform3fv(glGetUniformLocation(container_shader.ID_, "object_color"), 1, glm::value_ptr(container_color));
         glUniform3fv(glGetUniformLocation(container_shader.ID_, "light_color"), 1, glm::value_ptr(light_color));
+        container_shader.SetVec3f("light_pos", light_pos);
         container_shader.Unbind();
 
         light_shader.Use();
@@ -120,20 +123,19 @@ namespace lighting
         return {light_shader, container_shader};
     }
 
-    void Run(ch12_return input, f32 dt)
+    void Run(lighting_return input, f32 dt)
     {
         delta_time = dt;
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.01f, 0.01f, 0.01f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glBindVertexArray(container_vao);
         input.object_shader.Use();
         input.object_shader.SetMat4f("view", cam.GetViewMatrix());
         input.object_shader.SetMat4f("projection", glm::perspective(glm::radians(cam.zoom_), aspect_ratio, 0.1f, 100.0f));
+        input.object_shader.SetVec3f("view_pos", cam.position_);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         input.object_shader.Unbind();
-
-
 
         glBindVertexArray(light_vao);
         input.light_shader.Use();
@@ -145,7 +147,6 @@ namespace lighting
         glBindVertexArray(0);
 
         glBindVertexArray(0);
-
     }
 
 } // namepsace lighting
