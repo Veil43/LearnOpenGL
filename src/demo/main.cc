@@ -115,8 +115,8 @@ main(int argc, char **argv)
     // CHAPTER 10 USES CHAPTER 9's WORK
     // ch10::Start(window);
     ex10::Start1(window); // << Excercises for chapter 10
-    lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/object.fs", "../src/demo/shaders/lighting/light.fs");
-
+    lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/phong.fs", "../src/demo/shaders/lighting/light.fs");
+    lighting_return ch12ex = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/gouraud.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/gouraud.fs", "../src/demo/shaders/lighting/light.fs");
 
     // Set the callback for window resizing
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
@@ -135,7 +135,7 @@ main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
-        lighting::Run(ch12work, delta_time);
+        lighting::Run(ch12ex, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
