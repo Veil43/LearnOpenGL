@@ -119,6 +119,11 @@ public:
     {
         glUniform3fv(glGetUniformLocation(ID_, name.c_str()), 1, glm::value_ptr(val));
     }
+    void SetVec3f(const std::string& name, f32 x, f32 y, f32 z)
+    {
+        glm::vec3 val(x, y, z);
+        glUniform3fv(glGetUniformLocation(ID_, name.c_str()), 1, glm::value_ptr(val));
+    }
 };
 
 #endif // SHADER_H

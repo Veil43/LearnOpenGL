@@ -48,7 +48,7 @@ static GLFWwindow* globWindow = nullptr;
 #include "ch9.h"
 #include "ch10.h"
 #include "ex10.h"
-#include "ch12.h"
+#include "lighting12-18.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -73,6 +73,7 @@ main(int argc, char **argv)
     // Create a window
     const int kWWidth = 800;
     const int kWHeight = 600;
+    const int kAspectRatio = (kWWidth/kWHeight);
     GLFWwindow* window = glfwCreateWindow(kWWidth, kWHeight, "OpenGL Demo", NULL, NULL);
     if (window == NULL)
     {
@@ -115,8 +116,17 @@ main(int argc, char **argv)
     // CHAPTER 10 USES CHAPTER 9's WORK
     // ch10::Start(window);
     ex10::Start1(window); // << Excercises for chapter 10
-    lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/phong.fs", "../src/demo/shaders/lighting/light.fs");
-    lighting_return ch12ex = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/gouraud.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/gouraud.fs", "../src/demo/shaders/lighting/light.fs");
+    // lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/phong.fs", "../src/demo/shaders/lighting/light.fs");
+    // lighting_return ch13ex = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/gouraud.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/gouraud.fs", "../src/demo/shaders/lighting/light.fs");
+
+    lighting_return ch14work = lighting::Start
+    (
+        kAspectRatio,
+        "../src/demo/shaders/ch14/phong.vs",
+        "../src/demo/shaders/ch14/phong.vs",
+        "../src/demo/shaders/ch14/phong.fs",
+        "../src/demo/shaders/ch14/light.fs"
+    );
 
     // Set the callback for window resizing
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
@@ -135,7 +145,7 @@ main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
-        lighting::Run(ch12ex, delta_time);
+        lighting::Run(ch14work, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

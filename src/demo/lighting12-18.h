@@ -63,7 +63,7 @@ namespace lighting
 
     static glm::mat4 light_model(1.0f);
     // static glm::vec3 light_pos(1.2f, 1.0f, 2.0f);
-    static glm::vec3 light_pos(0.0f, 0.0f, 0.0f);
+    static glm::vec3 light_pos(0.0f, 1.0f, 0.0f);
     lighting_return Start(f32 ar, const std::string& vpath, const std::string& lvpath, const std::string& fpath, const std::string& lfpath) 
     {
         aspect_ratio = ar;
@@ -113,9 +113,14 @@ namespace lighting
         container_shader.SetMat4f("model", container_model);
         container_shader.SetMat4f("view", cam.GetViewMatrix());
         container_shader.SetMat4f("projection", glm::perspective(glm::radians(cam.zoom_), aspect_ratio, 0.1f, 100.0f));
-        glUniform3fv(glGetUniformLocation(container_shader.ID_, "object_color"), 1, glm::value_ptr(container_color));
-        glUniform3fv(glGetUniformLocation(container_shader.ID_, "light_color"), 1, glm::value_ptr(light_color));
-        container_shader.SetVec3f("light_pos", light_pos);
+        container_shader.SetVec3f("light.position", light_pos);
+        container_shader.SetVec3f("light.ambient", glm::vec3(0.1f));
+        container_shader.SetVec3f("light.diffuse", glm::vec3(0.5f));
+        container_shader.SetVec3f("light.specular", glm::vec3(1.0f));
+        container_shader.SetVec3f("material.ambient", 1.0f, 0.5f, 0.31f);
+        container_shader.SetVec3f("material.diffuse", 1.0f, 0.5f, 0.31f);
+        container_shader.SetVec3f("material.specular", 0.5f, 0.5f, 0.5f);
+        container_shader.SetFloat("material.shininess", 32.0f);
         container_shader.Unbind();
 
         light_shader.Use();
@@ -138,7 +143,7 @@ namespace lighting
         light_pos.x = 2*sin(t);
         light_pos.z = 2*cos(t);
         light_model = glm::mat4(1.0f);
-        light_model = glm::translate(light_model, glm::vec3(light_pos.x, 1.7f, light_pos.z));
+        light_model = glm::translate(light_model, light_pos);
         light_model = glm::scale(light_model, glm::vec3(0.1f));
         
         glBindVertexArray(container_vao);
@@ -146,7 +151,7 @@ namespace lighting
         input.object_shader.SetMat4f("view", cam.GetViewMatrix());
         input.object_shader.SetMat4f("projection", glm::perspective(glm::radians(cam.zoom_), aspect_ratio, 0.1f, 100.0f));
         input.object_shader.SetVec3f("view_pos", cam.position_);
-        input.object_shader.SetVec3f("light_position", light_pos);
+        input.object_shader.SetVec3f("light.position", light_pos);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         input.object_shader.Unbind();
 
