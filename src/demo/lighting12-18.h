@@ -125,21 +125,26 @@ namespace lighting
         container_shader.SetFloat("material.shininess", 32.0f);
         container_shader.Unbind();
 
-        Texture container_texture("../images/container2.png", GL_RGBA);
+        Texture container_diffuse_map("../images/container2.png", GL_RGBA);
+        Texture container_specular_map("../images/container2_specular.png", GL_RGBA);
+        Texture container_emission_map("../images/matrix.jpg", GL_RGB);
         // Set Wrapping modes
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // Set Filtering modes
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         // Activate texture units
-        container_texture.Activate(0, container_shader, "material.diffuse");
-
+        container_diffuse_map.Activate(0, container_shader, "material.diffuse");
+        container_specular_map.Activate(1, container_shader, "material.specular");
+        container_emission_map.Activate(1, container_shader, "material.emission");
+        
         light_shader.Use();
         light_shader.SetMat4f("model", light_model);
         light_shader.SetMat4f("view", cam.GetViewMatrix());
         light_shader.SetMat4f("projection", glm::perspective(glm::radians(cam.zoom_), aspect_ratio, 0.1f, 100.0f));
         light_shader.Unbind();
+        container_emission_map;
         
         return {light_shader, container_shader};
     }
