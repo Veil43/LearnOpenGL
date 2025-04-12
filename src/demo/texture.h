@@ -54,7 +54,7 @@ public:
         shader.SetInt(name, texture_unit);
         glActiveTexture(GL_TEXTURE0 + texture_unit);
         glBindTexture(GL_TEXTURE_2D, ID_);
-        glUseProgram(0);
+        shader.Unbind();
     }
 };
 

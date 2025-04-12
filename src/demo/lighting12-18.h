@@ -86,8 +86,10 @@ namespace lighting
         glBufferData(GL_ARRAY_BUFFER, sizeof(kTheCube), kTheCube, GL_STATIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)0);
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)(3*sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)(6*sizeof(float)));
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
 
         glBindVertexArray(light_vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -117,11 +119,21 @@ namespace lighting
         container_shader.SetVec3f("light.ambient", glm::vec3(0.1f));
         container_shader.SetVec3f("light.diffuse", glm::vec3(0.5f));
         container_shader.SetVec3f("light.specular", glm::vec3(1.0f));
-        container_shader.SetVec3f("material.ambient", 1.0f, 0.5f, 0.31f);
-        container_shader.SetVec3f("material.diffuse", 1.0f, 0.5f, 0.31f);
+        // container_shader.SetVec3f("material.ambient", 1.0f, 0.5f, 0.31f);
+        // container_shader.SetVec3f("material.diffuse", 1.0f, 0.5f, 0.31f);
         container_shader.SetVec3f("material.specular", 0.5f, 0.5f, 0.5f);
         container_shader.SetFloat("material.shininess", 32.0f);
         container_shader.Unbind();
+
+        Texture container_texture("../images/container2.png", GL_RGBA);
+        // Set Wrapping modes
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        // Set Filtering modes
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        // Activate texture units
+        container_texture.Activate(0, container_shader, "material.diffuse");
 
         light_shader.Use();
         light_shader.SetMat4f("model", light_model);

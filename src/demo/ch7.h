@@ -25,7 +25,7 @@ GL_NEAREST: snaps to the texel closest you the current fragment's computed uv (r
 
 Setting filtering modes:
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINERA);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINERA);
 
 [Mipmaps]
 When rendering an object that is far away and therefore very small on the screen, it is impractical to sample from a high resolution texture
