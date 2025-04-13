@@ -23,7 +23,7 @@ static glfw_cursor_callback_type* GLFWCursorCallback = GLFWDefaultCursorCallback
 #define DECL_GLFW_SCROLL_CALLBACK(name) void name(GLFWwindow* window, double xoffset, double yoffset)
 DECL_GLFW_SCROLL_CALLBACK(GLFWDefaultScrollCallback)
 {
-    std::cerr << "WARNING: Not capturing the scroll callback.\n";
+    std::cerr << "WARNING: Not capturing the mouse scroll callback.\n";
     return;
 }
 typedef DECL_GLFW_SCROLL_CALLBACK(glfw_scroll_callback_type);
@@ -32,7 +32,7 @@ static glfw_scroll_callback_type* GLFWScrollCallback = GLFWDefaultScrollCallback
 #define DECL_GLFW_MOVEMENT_CALLBACK(name) void name(GLFWwindow* window)
 DECL_GLFW_MOVEMENT_CALLBACK(GLFWDefaultMovementCallback)
 {
-    std::cerr << "WARNING: Not capturing the movement callback.\n";
+    std::cerr << "WARNING: Not capturing the keyboard movement callback.\n";
     return;
 }
 typedef DECL_GLFW_MOVEMENT_CALLBACK(glfw_movement_callback_type);
@@ -48,7 +48,8 @@ static GLFWwindow* globWindow = nullptr;
 #include "ch9.h"
 #include "ch10.h"
 #include "ex10.h"
-#include "lighting12-18.h"
+#include "lighting12-15.h"
+#include "ch16.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -128,6 +129,15 @@ main(int argc, char **argv)
         "../src/demo/shaders/ch14/light.fs"
     );
 
+    lighting_return ch16work = ch16::Start
+    (
+        kAspectRatio,
+        "../src/demo/shaders/ch16/phong.vs",
+        "../src/demo/shaders/ch16/phong.vs",
+        "../src/demo/shaders/ch16/phong.dir.fs",
+        "../src/demo/shaders/ch16/light.fs"
+    );
+
     // Set the callback for window resizing
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetCursorPosCallback(window, GLFWCursorCallback);
@@ -145,7 +155,7 @@ main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
-        lighting::Run(ch14work, delta_time);
+        ch16::Run(ch16work, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

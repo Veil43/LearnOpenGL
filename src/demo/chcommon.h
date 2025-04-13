@@ -4,6 +4,7 @@
 #include "types.h"
 #include "object.h"
 #include "shader.h"
+#include "camera.h"
 #include "math.h"
 
 struct ch_return
@@ -17,5 +18,4 @@ struct lighting_return
     Shader light_shader;
     Shader object_shader;
 };
-
 #endif // CH_COMMON_H
