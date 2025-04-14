@@ -117,7 +117,7 @@ main(int argc, char **argv)
     ch_return ch9work = ch9::Start((kWWidth/kWHeight), "../src/demo/shaders/ch9/ch9.vs", "../src/demo/shaders/ch9/ch9.fs");
     // CHAPTER 10 USES CHAPTER 9's WORK
     // ch10::Start(window);
-    ex10::Start1(window); // << Excercises for chapter 10
+    ex10::Start1(window); // << Exercises for chapter 10
     // lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/phong.fs", "../src/demo/shaders/lighting/light.fs");
     // lighting_return ch13ex = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/gouraud.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/gouraud.fs", "../src/demo/shaders/lighting/light.fs");
 
@@ -158,7 +158,7 @@ main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
-        ch17::Run(ch17work, delta_time);
+        Run(ch17work, static_cast<f32>(delta_time));
 
         glfwSwapBuffers(window);
         glfwPollEvents();
