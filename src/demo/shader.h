@@ -80,13 +80,37 @@ class Shader
 public:
     u32 ID_;
 
-    Shader() =delete;
+    Shader()
+        : ID_{0}
+    {
+    }
 
     Shader(const char* vertex_path, const char* fragment_path)
     {
         std::string vsource = LoadFile(vertex_path);
         std::string fsource = LoadFile(fragment_path);
         ID_ = ch5::CreateShaderProgram(vsource.c_str(), fsource.c_str());
+    }
+
+    Shader(const Shader& other)
+    {
+        ID_ = other.ID_;
+    }
+
+    Shader& operator=(const Shader& other)
+    {
+        ID_ = other.ID_;
+        return *this;
+    }
+
+    Shader& operator=(Shader&& other)
+    {
+        if (this  != &other)
+        {
+            ID_ = other.ID_;
+            other.ID_ = 0;
+        }
+        return *this;
     }
 
     void Use()

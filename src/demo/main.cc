@@ -50,6 +50,7 @@ static GLFWwindow* globWindow = nullptr;
 #include "ex10.h"
 #include "lighting12-15.h"
 #include "ch16.h"
+#include "ch17.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -101,7 +102,7 @@ main(int argc, char **argv)
     }
     GLQueryAttribCount();
  
-    Object3D obj5 = ch5::Start();
+    Object3D_deprecated obj5 = ch5::Start();
     ch_return ch6work = ch6::Start("../src/demo/shaders/ch6/ch6.vs", "../src/demo/shaders/ch6/ch6.fs");
     ch_return ch6exercise1 = ch6::Start("../src/demo/shaders/ch6/ch6.1.vs", "../src/demo/shaders/ch6/ch6.fs");
     ch_return ch6exercise2 = ch6::Start("../src/demo/shaders/ch6/ch6.2.vs", "../src/demo/shaders/ch6/ch6.fs");
@@ -120,23 +121,25 @@ main(int argc, char **argv)
     // lighting_return ch12work = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/phong.fs", "../src/demo/shaders/lighting/light.fs");
     // lighting_return ch13ex = lighting::Start((kWWidth/kWHeight), "../src/demo/shaders/lighting/gouraud.vs", "../src/demo/shaders/lighting/vertex.vs", "../src/demo/shaders/lighting/gouraud.fs", "../src/demo/shaders/lighting/light.fs");
 
-    lighting_return ch14work = lighting::Start
-    (
-        kAspectRatio,
-        "../src/demo/shaders/ch14/phong.vs",
-        "../src/demo/shaders/ch14/phong.vs",
-        "../src/demo/shaders/ch14/phong.fs",
-        "../src/demo/shaders/ch14/light.fs"
-    );
-
-    lighting_return ch16work = ch16::Start
-    (
-        kAspectRatio,
-        "../src/demo/shaders/ch16/phong.vs",
-        "../src/demo/shaders/ch16/phong.vs",
-        "../src/demo/shaders/ch16/phong.dir.fs",
-        "../src/demo/shaders/ch16/light.fs"
-    );
+    // lighting_return ch14work = lighting::Start
+    // (
+    //     kAspectRatio,
+    //     "../src/demo/shaders/ch14/phong.vs",
+    //     "../src/demo/shaders/ch14/phong.vs",
+    //     "../src/demo/shaders/ch14/phong.fs",
+    //     "../src/demo/shaders/ch14/light.fs"
+    // );
+    
+    // lighting_return ch16work = ch16::Start
+    // (
+    //     kAspectRatio,
+    //     "../src/demo/shaders/ch16/phong.vs",
+    //     "../src/demo/shaders/ch16/phong.vs",
+    //     "../src/demo/shaders/ch16/phong.dir.fs",
+    //     "../src/demo/shaders/ch16/light.fs"
+    // );
+    
+    ch17::return_type ch17work = ch17::Start(kAspectRatio);
 
     // Set the callback for window resizing
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
@@ -155,7 +158,7 @@ main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // ex10::Run1(ch9work, kWWidth/kWHeight, delta_time); << Cool FPS stroll in the void
-        ch16::Run(ch16work, delta_time);
+        ch17::Run(ch17work, delta_time);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

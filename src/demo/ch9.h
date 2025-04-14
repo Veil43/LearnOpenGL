@@ -122,7 +122,7 @@ namespace ch9
 
         glEnable(GL_DEPTH_TEST);
         GLQueryError();
-        Object3D obj{};
+        Object3D_deprecated obj{};
         return {obj, shader};
     }
 

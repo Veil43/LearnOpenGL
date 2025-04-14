@@ -23,7 +23,7 @@ namespace ch6
             0, 1, 2,
         };
 
-        Object3D obj(vertices, 3, indices, 3);
+        Object3D_deprecated obj(vertices, 3, indices, 3);
         Shader shader(vsource, fsource);
         return {obj, shader}; 
     }

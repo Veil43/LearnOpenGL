@@ -7,7 +7,7 @@
 namespace ch8
 {
     static glm::mat4 trans = glm::mat4(1.0f);
-    ch_return Start(Object3D obj, const std::string& vsource, const std::string& fsource)
+    ch_return Start(Object3D_deprecated obj, const std::string& vsource, const std::string& fsource)
     {
 
         Texture texture1("../images/container.jpg", GL_RGB);

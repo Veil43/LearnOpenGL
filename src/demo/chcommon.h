@@ -2,14 +2,15 @@
 #define CH_COMMON_H
 
 #include "types.h"
-#include "object.h"
+#include "object_deprecated.h"
+#include "objectv2.h"
 #include "shader.h"
 #include "camera.h"
 #include "math.h"
 
 struct ch_return
 {
-    Object3D obj;
+    Object3D_deprecated obj;
     Shader shader;
 };
 

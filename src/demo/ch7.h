@@ -85,7 +85,7 @@ namespace ch7
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
-        Object3D obj(vertices, 4, indices, 6);
+        Object3D_deprecated obj(vertices, 4, indices, 6);
         Shader shader(vsource, fsource);
         texture1.Activate(0, shader, "texture1");
         texture2.Activate(1, shader, "texture2");

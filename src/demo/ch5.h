@@ -5,11 +5,11 @@
 
 namespace ch5
 {
-    Object3D Start(void);
-    void Run(Object3D);
+    Object3D_deprecated Start(void);
+    void Run(Object3D_deprecated);
 
     static u32 shader = 0;
-    Object3D Start()
+    Object3D_deprecated Start()
     {
         Vertex vertices[] =
         {
@@ -25,7 +25,7 @@ namespace ch5
             1, 2, 3,
         };
 
-        Object3D obj = Object3D(vertices, 4, indices, 6);
+        Object3D_deprecated obj = Object3D_deprecated(vertices, 4, indices, 6);
 
         const std::string kVertexShaderSource = LoadFile("../src/demo/shaders/ch5/ch5.vs");
         const std::string kFragmentShaderSource = LoadFile("../src/demo/shaders/ch5/ch5.fs");
@@ -34,7 +34,7 @@ namespace ch5
         return obj;
     }
 
-    void Run(Object3D obj)
+    void Run(Object3D_deprecated obj)
     {
         obj.Draw(shader);
         // glUseProgram(shader);
