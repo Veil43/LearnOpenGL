@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.20)
 project(learngl)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE_DEBUG ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(demo src/demo/main.cc
     src/ext/glad/src/glad.c)

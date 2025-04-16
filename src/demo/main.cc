@@ -5,8 +5,6 @@
 #include <stb_image.h>
 
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 #define ENABLE_SAN 1
 
@@ -212,7 +210,12 @@ void GLQueryError()
     {
         glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         std::cout << "OpenGL Error: 0x" << std::hex <<  error << std::endl;
+#ifdef _WIN32
+        __debugbreak();
+#endif
+#ifndef _WIN32
         __builtin_trap();
+#endif
     }
 }
 

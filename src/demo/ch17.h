@@ -75,7 +75,7 @@ namespace ch17
         glEnable(GL_DEPTH_TEST);
 
         glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-        // glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        glfwSetInputMode(globWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
         object_3d container_obj((vertex*)CubePCNU, 36);
         Shader container_shader("../src/demo/shaders/ch17/container.vs", "../src/demo/shaders/ch17/container.fsh");

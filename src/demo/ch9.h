@@ -121,7 +121,6 @@ namespace ch9
         glBindVertexArray(0);
 
         glEnable(GL_DEPTH_TEST);
-        GLQueryError();
         Object3D_deprecated obj{};
         return {obj, shader};
     }
