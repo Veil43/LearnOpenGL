@@ -14,6 +14,7 @@ glBindTexture(GL_TEXTURE_2D, textureID);
 glUserProgram(shaderID)
 glUniform1i(glGetUniformLocation(shaderID, "name", unit_number));
 */
+#include "types.h"
 
 class Texture
 {

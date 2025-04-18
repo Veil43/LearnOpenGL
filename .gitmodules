@@ -4,3 +4,6 @@
 [submodule "src/ext/glm"]
 	path = src/ext/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "src/ext/assimp"]
+	path = src/ext/assimp
+	url = https://github.com/assimp/assimp.git

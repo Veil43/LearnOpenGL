@@ -27,6 +27,16 @@ target_include_directories(demo PRIVATE src/ext)
 add_subdirectory(src/ext/glm)
 target_link_libraries(demo PRIVATE glm)
 
+# Configure Assimp
+add_subdirectory(src/ext/assimp)
+target_link_libraries(demo PRIVATE assimp)
+set(ASSIMP_BUILD_TESTS OFF)
+set(ASSIMP_BUILD_ASSIMP_TOOLS ON)
+# Suppress warnings about deprecated functions
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+
+# Disable treating warnings as errors
+
 # Degub config stuff
 if(ENABLE_SAN AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Enabling sanitizers (ASan and UBSan)")

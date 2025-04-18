@@ -46,9 +46,10 @@ static GLFWwindow* globWindow = nullptr;
 #include "ch9.h"
 #include "ch10.h"
 #include "ex10.h"
-#include "lighting12-15.h"
-#include "ch16.h"
+// #include "lighting12-15.h"
+// #include "ch16.h"
 #include "ch17.h"
+#include "models.h"
 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 void ProcessInput(GLFWwindow *);
@@ -71,8 +72,8 @@ main(int argc, char **argv)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create a window
-    const int kWWidth = 800;
-    const int kWHeight = 600;
+    const f32 kWWidth = 800;
+    const f32 kWHeight = 600;
     const int kAspectRatio = (kWWidth/kWHeight);
     GLFWwindow* window = glfwCreateWindow(kWWidth, kWHeight, "OpenGL Demo", NULL, NULL);
     if (window == NULL)
